@@ -63,14 +63,14 @@
         };
       })(this);
       xstart = function(d) {
-        if (d.stats.quartile1 === d.stats.median) {
+        if (d.stats.quartile1 === d.stats.median && d.stats.quartile3 === d.stats.median) {
           return initialXStart(d) - 3;
         } else {
           return initialXStart(d);
         }
       };
       xend = function(d) {
-        if (d.stats.quartile3 === d.stats.median) {
+        if (d.stats.quartile1 === d.stats.median && d.stats.quartile3 === d.stats.median) {
           return initialXEnd(d) + 3;
         } else {
           return initialXEnd(d);

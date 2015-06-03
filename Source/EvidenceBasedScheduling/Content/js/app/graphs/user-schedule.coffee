@@ -94,8 +94,8 @@ class App.UserScheduleGraph
         initialXStart = (d) => @getCoordinateFromDate(xscale, startDate, d.stats.quartile1)
         initialXEnd = (d) => @getCoordinateFromDate(xscale, startDate, d.stats.quartile3)
         
-        xstart = (d) -> if d.stats.quartile1 == d.stats.median then initialXStart(d) - 3 else initialXStart(d)
-        xend = (d) -> if d.stats.quartile3 == d.stats.median then initialXEnd(d) + 3 else initialXEnd(d)
+        xstart = (d) -> if d.stats.quartile1 == d.stats.median && d.stats.quartile3 == d.stats.median then initialXStart(d) - 3 else initialXStart(d)
+        xend = (d) -> if d.stats.quartile1 == d.stats.median && d.stats.quartile3 == d.stats.median then initialXEnd(d) + 3 else initialXEnd(d)
         @svg.selectAll(".bar")
             .data(@data)
             .enter()
