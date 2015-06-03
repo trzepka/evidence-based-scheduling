@@ -90,60 +90,48 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\main.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Scripts\app\controllers\userScheduleController.js" />
-    <Content Include="Scripts\app\graphs\user-schedule.js">
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\js\app\controllers\userScheduleController.js" />
+    <Content Include="Content\js\app\graphs\user-schedule.js">
       <DependentUpon>user-schedule.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\graphs\user-schedule.min.js">
+    <Content Include="Content\js\app\graphs\user-schedule.min.js">
       <DependentUpon>user-schedule.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\lib\angular\angular-route.js" />
-    <Content Include="Scripts\lib\angular\angular-route.min.js" />
-    <Content Include="Scripts\app\app.js" />
-    <Content Include="Scripts\app\controllers\taskController.js" />
-    <Content Include="Scripts\app\services.js" />
-    <Content Include="Scripts\lib\angular\angular-mocks.js" />
-    <Content Include="Scripts\lib\angular\angular-resource.js" />
-    <Content Include="Scripts\lib\angular\angular-resource.min.js" />
-    <Content Include="Scripts\lib\angular\angular.js" />
-    <Content Include="Scripts\lib\angular\angular.min.js" />
-    <Content Include="Scripts\lib\d3\d3.js" />
-    <Content Include="Scripts\lib\d3\d3.min.js" />
-    <Content Include="Scripts\lib\d3\LICENSE" />
-    <Content Include="Scripts\lib\angular\angular.min.js.map" />
-    <Content Include="Scripts\lib\angular\angular-resource.min.js.map" />
-    <Content Include="Scripts\lib\angular\angular-route.min.js.map" />
-    <Content Include="Scripts\app\graphs\user-schedule.coffee" />
-    <Content Include="Scripts\app\graphs\user-schedule.js.map">
+    <Content Include="Content\js\lib\angular\angular-route.js" />
+    <Content Include="Content\js\lib\angular\angular-route.min.js" />
+    <Content Include="Content\js\app\app.js" />
+    <Content Include="Content\js\app\controllers\taskController.js" />
+    <Content Include="Content\js\app\services.js" />
+    <Content Include="Content\js\lib\angular\angular-mocks.js" />
+    <Content Include="Content\js\lib\angular\angular-resource.js" />
+    <Content Include="Content\js\lib\angular\angular-resource.min.js" />
+    <Content Include="Content\js\lib\angular\angular.js" />
+    <Content Include="Content\js\lib\angular\angular.min.js" />
+    <Content Include="Content\js\lib\d3\d3.js" />
+    <Content Include="Content\js\lib\d3\d3.min.js" />
+    <Content Include="Content\js\lib\d3\LICENSE" />
+    <Content Include="Content\js\lib\angular\angular.min.js.map" />
+    <Content Include="Content\js\lib\angular\angular-resource.min.js.map" />
+    <Content Include="Content\js\lib\angular\angular-route.min.js.map" />
+    <Content Include="Content\js\app\graphs\user-schedule.coffee" />
+    <Content Include="Content\js\app\graphs\user-schedule.js.map">
       <DependentUpon>user-schedule.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\graphs\user-schedule.min.js.map">
+    <Content Include="Content\js\app\graphs\user-schedule.min.js.map">
       <DependentUpon>user-schedule.min.js</DependentUpon>
     </Content>
-    <None Include="Scripts\lib\jquery\jquery-1.9.1.intellisense.js" />
-    <Content Include="Icon.png" />
-    <Content Include="Scripts\lib\bootstrap\bootstrap.js" />
-    <Content Include="Scripts\lib\bootstrap\bootstrap.min.js" />
-    <Content Include="Scripts\lib\jquery\jquery-1.9.1.js" />
-    <Content Include="Scripts\lib\jquery\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\lib\npm\npm.js" />
+    <None Include="Content\js\lib\jquery\jquery-1.9.1.intellisense.js" />
+    <Content Include="Content\js\lib\bootstrap\bootstrap.js" />
+    <Content Include="Content\js\lib\bootstrap\bootstrap.min.js" />
+    <Content Include="Content\js\lib\jquery\jquery-1.9.1.js" />
+    <Content Include="Content\js\lib\jquery\jquery-1.9.1.min.js" />
+    <Content Include="Content\js\lib\npm\npm.js" />
     <Content Include="StaticPages\index.htm" />
     <Content Include="StaticPages\Partial\task-list.html" />
     <Content Include="StaticPages\Partial\user-schedule.html" />
     <Content Include="Web.config" />
-    <Content Include="Scripts\lib\jquery\jquery-1.9.1.min.map" />
+    <Content Include="Content\js\lib\jquery\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\TasksProvider.cs" />

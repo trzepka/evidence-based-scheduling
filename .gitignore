@@ -1,4 +1,5 @@
 *.suo
 Source/EvidenceBasedScheduling/bin/
 Source/EvidenceBasedScheduling/obj/
+Source/EvidenceBasedScheduling/Content/bower_components/
 packages/

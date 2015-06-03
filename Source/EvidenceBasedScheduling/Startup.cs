@@ -41,13 +41,19 @@ namespace EvidenceBasedScheduling
             app.UseStaticFiles(new StaticFileOptions
             {
                 RequestPath = new PathString("/css"),
-                FileSystem = new PhysicalFileSystem(@".\Content"),
+                FileSystem = new PhysicalFileSystem(@".\Content\css"),
             });
 
             app.UseStaticFiles(new StaticFileOptions
             {
                 RequestPath = new PathString("/js"),
-                FileSystem = new PhysicalFileSystem(@".\Scripts"),
+                FileSystem = new PhysicalFileSystem(@".\Content\js"),
+            });
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                RequestPath = new PathString("/lib"),
+                FileSystem = new PhysicalFileSystem(@".\Content\bower_components"),
             });
         }
 
