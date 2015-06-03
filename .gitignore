@@ -1,4 +1,4 @@
 *.suo
-EvidenceBasedScheduling/bin/
-EvidenceBasedScheduling/obj/
+Source/EvidenceBasedScheduling/bin/
+Source/EvidenceBasedScheduling/obj/
 packages/
