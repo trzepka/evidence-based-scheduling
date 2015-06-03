@@ -1,0 +1,11 @@
+﻿<ul>
+    <li>
+        <!--Sidebar content-->
+        Search: <input ng-model="query">
+    </li>
+    <li ng-repeat="task in tasks | filter:query | orderBy:name" class="thumbnail">
+        <a href="#/phones/{{task.key}}">{{task.key}}</a>
+        <a href="#/phones/{{task.key}}">{{task.name}}</a>
+        <p>{{task.description}}</p>
+    </li>
+</ul>

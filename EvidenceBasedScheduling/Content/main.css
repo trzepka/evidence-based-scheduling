@@ -1,0 +1,50 @@
+﻿body {
+  padding-top: 50px;
+}
+.main-content{
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+line.whisker {
+  fill: none;
+  stroke: steelblue;
+  shape-rendering: crispEdges;
+}
+
+line.median{
+  fill: none;
+  stroke: white;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.tooltip-bar{
+  fill: none;
+}
+
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 100px;                  
+  height: 28px;                 
+  padding: 2px;             
+  font: 12px sans-serif;        
+  background: lightsteelblue;   
+  border: 0px;      
+  pointer-events: none;         
+}
