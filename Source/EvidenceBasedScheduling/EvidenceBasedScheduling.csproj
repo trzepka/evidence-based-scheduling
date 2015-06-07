@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlassian.Jira">
+      <HintPath>..\packages\Atlassian.SDK.2.5.0\lib\Atlassian.Jira.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -128,6 +131,7 @@
     <Content Include="Content\js\lib\jquery\jquery-1.9.1.min.js" />
     <Content Include="Content\js\lib\npm\npm.js" />
     <Content Include="StaticPages\index.htm" />
+    <Content Include="StaticPages\Partial\signin.html" />
     <Content Include="StaticPages\Partial\task-list.html" />
     <Content Include="StaticPages\Partial\user-schedule.html" />
     <Content Include="Web.config" />
