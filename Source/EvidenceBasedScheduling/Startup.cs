@@ -49,12 +49,6 @@ namespace EvidenceBasedScheduling
                 RequestPath = new PathString("/js"),
                 FileSystem = new PhysicalFileSystem(@".\Content\js"),
             });
-
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                RequestPath = new PathString("/lib"),
-                FileSystem = new PhysicalFileSystem(@".\Content\bower_components"),
-            });
         }
 
         private static HttpConfiguration ConfigureWebApi()
