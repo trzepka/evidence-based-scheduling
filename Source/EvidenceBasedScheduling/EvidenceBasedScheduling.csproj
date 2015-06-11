@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -19,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -109,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\js\app\controllers\signinController.js" />
     <Content Include="Content\js\app\controllers\userScheduleController.js" />
     <Content Include="Content\js\app\graphs\user-schedule.js">
       <DependentUpon>user-schedule.coffee</DependentUpon>
@@ -116,22 +119,10 @@
     <Content Include="Content\js\app\graphs\user-schedule.min.js">
       <DependentUpon>user-schedule.js</DependentUpon>
     </Content>
-    <Content Include="Content\js\lib\angular\angular-route.js" />
-    <Content Include="Content\js\lib\angular\angular-route.min.js" />
     <Content Include="Content\js\app\app.js" />
     <Content Include="Content\js\app\controllers\taskController.js" />
+    <Content Include="Content\js\app\routingConfig.js" />
     <Content Include="Content\js\app\services.js" />
-    <Content Include="Content\js\lib\angular\angular-mocks.js" />
-    <Content Include="Content\js\lib\angular\angular-resource.js" />
-    <Content Include="Content\js\lib\angular\angular-resource.min.js" />
-    <Content Include="Content\js\lib\angular\angular.js" />
-    <Content Include="Content\js\lib\angular\angular.min.js" />
-    <Content Include="Content\js\lib\d3\d3.js" />
-    <Content Include="Content\js\lib\d3\d3.min.js" />
-    <Content Include="Content\js\lib\d3\LICENSE" />
-    <Content Include="Content\js\lib\angular\angular.min.js.map" />
-    <Content Include="Content\js\lib\angular\angular-resource.min.js.map" />
-    <Content Include="Content\js\lib\angular\angular-route.min.js.map" />
     <Content Include="Content\js\app\graphs\user-schedule.coffee" />
     <Content Include="Content\js\app\graphs\user-schedule.js.map">
       <DependentUpon>user-schedule.js</DependentUpon>
@@ -139,18 +130,11 @@
     <Content Include="Content\js\app\graphs\user-schedule.min.js.map">
       <DependentUpon>user-schedule.min.js</DependentUpon>
     </Content>
-    <None Include="Content\js\lib\jquery\jquery-1.9.1.intellisense.js" />
-    <Content Include="Content\js\lib\bootstrap\bootstrap.js" />
-    <Content Include="Content\js\lib\bootstrap\bootstrap.min.js" />
-    <Content Include="Content\js\lib\jquery\jquery-1.9.1.js" />
-    <Content Include="Content\js\lib\jquery\jquery-1.9.1.min.js" />
-    <Content Include="Content\js\lib\npm\npm.js" />
     <Content Include="StaticPages\index.htm" />
     <Content Include="StaticPages\Partial\signin.html" />
     <Content Include="StaticPages\Partial\task-list.html" />
     <Content Include="StaticPages\Partial\user-schedule.html" />
     <Content Include="Web.config" />
-    <Content Include="Content\js\lib\jquery\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\TasksProvider.cs" />
@@ -171,11 +155,15 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\js\lib\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>
