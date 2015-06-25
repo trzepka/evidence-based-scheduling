@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using Owin;
 using Microsoft.Owin;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
 
 using Microsoft.Owin.Extensions;
+using Microsoft.Owin.Security.Cookies;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -24,6 +28,15 @@ namespace EvidenceBasedScheduling
             app.UseErrorPage();
 #endif
             app.UseWebApi(ConfigureWebApi());
+            ConfigureAuth(app);
+            app.Use((context, next) =>
+            {
+                //TODO:reconsider when auth is correctly done
+                var response = new { username = "test-user", role = "user" };
+                context.Response.Cookies.Append("user",
+                    JsonConvert.SerializeObject(response));
+                return next.Invoke();
+            });
 
             ConfigureStaticFiles(app);
 
@@ -54,6 +67,8 @@ namespace EvidenceBasedScheduling
         private static HttpConfiguration ConfigureWebApi()
         {
             HttpConfiguration config = new HttpConfiguration();
+            config.SuppressDefaultHostAuthentication();
+            config.Filters.Add(new HostAuthenticationFilter(DefaultAuthenticationTypes.ApplicationCookie));
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute("Default", "api/{controller}/{action}");
 
@@ -63,6 +78,17 @@ namespace EvidenceBasedScheduling
             config.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
 #endif
             return config;
+        }
+
+        public void ConfigureAuth(IAppBuilder app)
+        {
+
+            // Enable the application to use a cookie to store information for the signed in user
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/")
+            });
         }
     }
 }

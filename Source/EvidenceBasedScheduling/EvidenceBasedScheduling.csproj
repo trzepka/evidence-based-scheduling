@@ -101,6 +101,9 @@
     <Reference Include="System.Web.Http.Owin">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http.Tracing">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Tracing.5.2.3\lib\net45\System.Web.Http.Tracing.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -138,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\TasksProvider.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Models\Api\DistributionStatistics.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Models\Api\UserSchedule.cs" />

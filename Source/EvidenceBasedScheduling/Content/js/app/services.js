@@ -37,13 +37,13 @@ App.appModule
             return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
         },
         login: function (user, success, error) {
-            $http.post("/login", user).success(function (user) {
+            $http.post("/api/auth/login", user).success(function (user) {
                 changeUser(user);
                 success(user);
             }).error(error);
         },
         logout: function (success, error) {
-            $http.post('/logout').success(function () {
+            $http.post('/api/auth/logout').success(function () {
                 changeUser({
                     username: '',
                     role: userRoles.public

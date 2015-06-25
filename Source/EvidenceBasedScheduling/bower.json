@@ -1,9 +1,5 @@
 {
   "name": "evidence-based-scheduling",
-  "authors": [
-    "Tomasz Rzepka"
-  ],
-  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
