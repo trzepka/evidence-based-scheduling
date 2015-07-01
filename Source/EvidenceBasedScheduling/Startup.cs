@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Web;
 using Owin;
 using Microsoft.Owin;
 using System.Web.Http;
+using EvidenceBasedScheduling.Models.Jira;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
@@ -32,13 +34,14 @@ namespace EvidenceBasedScheduling
             app.Use((context, next) =>
             {
                 //TODO:reconsider when auth is correctly done
-                var response = new { username = "test-user", role = "user" };
+                var response = new {username = "test-user", role = new {title = "user", bitMask = 2}};
                 context.Response.Cookies.Append("user",
                     JsonConvert.SerializeObject(response));
                 return next.Invoke();
             });
 
             ConfigureStaticFiles(app);
+            
 
             app.UseStageMarker(PipelineStage.MapHandler);
         }

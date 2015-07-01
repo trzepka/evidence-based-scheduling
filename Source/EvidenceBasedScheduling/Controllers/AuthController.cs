@@ -33,7 +33,7 @@ namespace EvidenceBasedScheduling.Controllers
             var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie,
                 ClaimTypes.NameIdentifier, ClaimTypes.Role);
 
-            authenticationManager.SignIn(new AuthenticationProperties()
+            authenticationManager.SignIn(new AuthenticationProperties
             {
                 AllowRefresh = true,
                 IsPersistent = user.RememberMe,
