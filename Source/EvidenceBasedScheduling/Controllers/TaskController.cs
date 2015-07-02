@@ -1,9 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using EvidenceBasedScheduling.Business;
 using EvidenceBasedScheduling.Models.Api;
+using EvidenceBasedScheduling.Models.Jira;
+using Microsoft.AspNet.Identity.Owin;
+using Newtonsoft.Json;
+using RestSharp;
+using RestSharp.Contrib;
+using RestSharp.Extensions;
 
 namespace EvidenceBasedScheduling.Controllers
 {
@@ -15,7 +24,7 @@ namespace EvidenceBasedScheduling.Controllers
         public IEnumerable<Task> Index()
         {
             var taskProvider = new TasksProvider();
-            return taskProvider.CurrentTasks.Union(taskProvider.CurrentTasks);
+            return taskProvider.CurrentTasks;
         }
 
         [HttpGet]
@@ -24,7 +33,7 @@ namespace EvidenceBasedScheduling.Controllers
             var taskProvider = new TasksProvider();
             var velocitiesByUser = taskProvider.HistoricalTasks.GroupBy(t => t.Assignee.Name)
                 .ToDictionary(g => g.Key, g => g.Select(e => e.EstimateSeconds * 1.0 / e.TimeSpentSeconds));
-            var tasksByUser = taskProvider.CurrentTasks.GroupBy(u => u.Assignee.Name)
+            var tasksByUser = taskProvider.CurrentTasks.Where(u => u.Assignee != null).GroupBy(u => u.Assignee.Name)
                 .ToDictionary(g => g.Key, g => g.Select(e => e));
             var result = new List<UserSchedule>();
             var startDate = DateTime.Now.Date;
