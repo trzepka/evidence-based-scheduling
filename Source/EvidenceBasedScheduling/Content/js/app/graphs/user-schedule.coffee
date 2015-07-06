@@ -7,6 +7,8 @@ class App.UserScheduleGraph
 
         startDate = new Date()
         margin = {top: 20, right: 20, bottom: 30, left: 60}
+        maxUserNameLength = d3.max(@data, (d) -> d.user.name.length)*6;
+        margin.left = maxUserNameLength + 5;
         width = 960 - margin.left - margin.right
         height = 500 - margin.top - margin.bottom
         @svg = d3

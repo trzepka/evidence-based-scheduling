@@ -6,7 +6,7 @@
     }
 
     UserScheduleGraph.prototype.draw = function() {
-      var format, height, margin, startDate, width, x, xAxis, y, yAxis;
+      var format, height, margin, maxUserNameLength, startDate, width, x, xAxis, y, yAxis;
       format = d3.time.format("%Y-%m-%d");
       startDate = new Date();
       margin = {
@@ -15,6 +15,10 @@
         bottom: 30,
         left: 60
       };
+      maxUserNameLength = d3.max(this.data, function(d) {
+        return d.user.name.length;
+      }) * 6;
+      margin.left = maxUserNameLength + 5;
       width = 960 - margin.left - margin.right;
       height = 500 - margin.top - margin.bottom;
       this.svg = d3.select('#' + this.parentTagId).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
