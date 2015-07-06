@@ -47,6 +47,8 @@ div.tooltip {
   background: lightsteelblue;   
   border: 0px;      
   pointer-events: none;         
+.bar:hover{
+    stroke:red;
 }
 
 .form-signin {

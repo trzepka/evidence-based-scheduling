@@ -64,34 +64,6 @@ class App.UserScheduleGraph
                 .attr("y1", (d) -> y(d.user.name) - 10)
                 .attr("y2", (d) -> y(d.user.name) + 10)
                 
-#        tooltipDiv = d3.select("body")
-#            .append("div")   
-#            .attr("class", "tooltip")               
-#            .style("opacity", 0);
-#        @svg.selectAll(".median-tooltip")
-#            .data(@data)
-#            .enter()
-#            .append("rect")
-#                .attr("class", "tooltip-bar")
-#                .attr("x", (d) => @getCoordinateFromDate(x, startDate, d.stats.median) - 3)
-#                .attr("height", 20)
-#                .attr("y", (d) -> y(d.user.name))
-#                .attr("width", (d) ->  6)
-#            .on("mouseover", (d) ->      
-#                tooltipDiv.transition()        
-#                    .duration(200)      
-#                    .style("opacity", .9);    
-#                tooltipDiv.html(format( d.stats.median))  
-#                    .style("left", (d3.event.pageX) + "px")     
-#                    .style("top", (d3.event.pageY - 28) + "px");    
-#            )                      
-#            .on("mouseout", (d) ->       
-#                tooltipDiv.transition()        
-#                    .duration(500)      
-#                    .style("opacity", 0);   
-#            );
-#            
-
     drawBar: (xscale, yscale, startDate) ->
         initialXStart = (d) => @getCoordinateFromDate(xscale, startDate, d.stats.quartile1)
         initialXEnd = (d) => @getCoordinateFromDate(xscale, startDate, d.stats.quartile3)
