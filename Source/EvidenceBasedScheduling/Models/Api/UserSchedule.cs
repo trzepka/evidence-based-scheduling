@@ -4,5 +4,6 @@ namespace EvidenceBasedScheduling.Models.Api
     {
         public DistributionStatistics<int> Stats { get; set; }
         public Assignee User { get; set; }
+        public bool IsPessimistic { get; set; }
     }
 }

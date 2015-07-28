@@ -20,6 +20,9 @@ namespace EvidenceBasedScheduling.Controllers
     [Route("{action=index}")]
     public class TaskController : ApiController
     {
+        private const string UNASSIGNED = "Unassigned";
+        private const int DEFAULT_PESSIMISTIC_LENGTH_SECONDS = 2 * 24 * 60 * 60;//2 days
+
         [HttpGet]
         public IEnumerable<Task> Index()
         {
@@ -30,37 +33,54 @@ namespace EvidenceBasedScheduling.Controllers
         [HttpGet]
         public IEnumerable<UserSchedule> UserSchedules()
         {
+
             var taskProvider = new TasksProvider();
-            var velocitiesByUser = taskProvider.HistoricalTasks.GroupBy(t => t.Assignee.Name)
-                .ToDictionary(g => g.Key, g => g.Select(e => e.EstimateSeconds * 1.0 / e.TimeSpentSeconds));
-            var tasksByUser = taskProvider.CurrentTasks.Where(u => u.Assignee != null).GroupBy(u => u.Assignee.Name)
+            var tasksByUser = taskProvider.CurrentTasks.GroupBy(u => u.Assignee == null ? UNASSIGNED : u.Assignee.Name)
                 .ToDictionary(g => g.Key, g => g.Select(e => e));
+            var velocitiesByUser = taskProvider.HistoricalTasks
+                .Where(t => t.Assignee != null && tasksByUser.ContainsKey(t.Assignee.Name))
+                .GroupBy(t => t.Assignee.Name)
+                .ToDictionary(g => g.Key, g => g.Select(e => e.EstimateSeconds * 1.0 / e.TimeSpentSeconds));
             var result = new List<UserSchedule>();
             var startDate = DateTime.Now.Date;
             var random = new Random();
-            foreach (var user in velocitiesByUser)
+            foreach (var usersTasks in tasksByUser)
             {
-
-                var velocities = user.Value.ToArray();
-                if (!tasksByUser.ContainsKey(user.Key))
+                if (!velocitiesByUser.ContainsKey(usersTasks.Key))
                 {
-                    result.Add(new UserSchedule { User = new Assignee { Name = user.Key }, Stats = new DistributionStatistics<int>() });
+                    result.Add(CreatePessimisticSchedule(usersTasks.Value, usersTasks.Key, startDate));
+                    continue;
                 }
+                var velocities = velocitiesByUser[usersTasks.Key].ToArray();
                 var possibleFinishDates = new List<TimeSpan>();
-                for (int i = 0; i < 1000; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     var sumOfTasks =
-                        tasksByUser[user.Key].Sum(d => GetRandomizedActualForTask(d, velocities, random));
+                        usersTasks.Value.Sum(task => GetRandomizedActualForTask(task, velocities, random));
                     possibleFinishDates.Add(TimeSpan.FromSeconds(sumOfTasks));
                 }
                 result.Add(new UserSchedule
                 {
-                    User = new Assignee { Name = user.Key },
+                    User = new Assignee { Name = usersTasks.Key },
                     Stats = CalculateDaysDistribution(possibleFinishDates, startDate)
                 });
             }
 
             return result;
+        }
+
+        private UserSchedule CreatePessimisticSchedule(IEnumerable<Task> tasks, string username, DateTime startDate)
+        {
+            return new UserSchedule
+            {
+                User = new Assignee { Name = username },
+                Stats = CalculateDaysDistribution(new[] { 
+                  TimeSpan.FromSeconds(DEFAULT_PESSIMISTIC_LENGTH_SECONDS),
+                  TimeSpan.FromSeconds(DEFAULT_PESSIMISTIC_LENGTH_SECONDS / 2),
+                  TimeSpan.FromSeconds(DEFAULT_PESSIMISTIC_LENGTH_SECONDS * 2),
+                }, startDate),
+                IsPessimistic = true
+            };
         }
 
         private DistributionStatistics<int> CalculateDaysDistribution(IEnumerable<TimeSpan> timeSpans, DateTime startDate)
@@ -93,7 +113,8 @@ namespace EvidenceBasedScheduling.Controllers
 
         private static double GetRandomizedActualForTask(Task d, double[] velocities, Random random)
         {
-            return d.EstimateSeconds / (velocities[random.Next(0, velocities.Length)]);
+            var estimate = d.EstimateSeconds == 0 ? DEFAULT_PESSIMISTIC_LENGTH_SECONDS : d.EstimateSeconds;
+            return estimate / (velocities[random.Next(0, velocities.Length)]);
         }
     }
 }
