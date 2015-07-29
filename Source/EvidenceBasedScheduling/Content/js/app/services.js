@@ -5,7 +5,7 @@ App.appModule
         function ($resource) {
             return $resource('api/tasks/', {}, {
                 query: { method: 'GET', isArray: true },
-                userSchedules: { method: 'GET', isArray: true, url: 'api/tasks/userSchedules' }
+                userSchedules: { method: 'GET', isArray: true, url: 'api/tasks/predictUsersSchedules' }
             });
         }]);
 

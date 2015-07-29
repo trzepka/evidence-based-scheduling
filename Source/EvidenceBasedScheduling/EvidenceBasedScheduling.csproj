@@ -145,6 +145,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Models\Api\DistributionStatistics.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Models\Api\PredictedTask.cs" />
     <Compile Include="Models\Api\UserSchedule.cs" />
     <Compile Include="Models\Api\Assignee.cs" />
     <Compile Include="Models\Api\Task.cs" />

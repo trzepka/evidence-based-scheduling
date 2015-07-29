@@ -2,6 +2,17 @@
 {
     public class Task
     {
+        public Task() { }
+        public Task(Task otherTask)
+        {
+            Key = otherTask.Key;
+            Name = otherTask.Name;
+            Description = otherTask.Description;
+            Assignee = otherTask.Assignee;
+            TimeSpentSeconds = otherTask.TimeSpentSeconds;
+            EstimateSeconds = otherTask.EstimateSeconds;
+        }
+
         public string Key { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
