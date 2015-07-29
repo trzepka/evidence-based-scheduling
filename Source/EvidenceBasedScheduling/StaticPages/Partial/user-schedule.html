@@ -1,2 +1,9 @@
-﻿
+﻿<div>
+    <input type="checkbox" ng-checked="showUnestimatedTasks" ng-model="showUnestimatedTasks" />
+    Show unestimated tasks
+</div>
+<div>
+    <input type="checkbox" ng-checked="showUnassignedTasks" ng-model="showUnassignedTasks" ng-change="toggleUnassignedTasks()" />
+    Show unassigned tasks
+</div>
 <div id="user-schedule-graph"></div>
