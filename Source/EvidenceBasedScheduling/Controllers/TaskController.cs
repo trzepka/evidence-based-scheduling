@@ -95,21 +95,12 @@ namespace EvidenceBasedScheduling.Controllers
             foreach (var day in orderedDays)
             {
                 probabilitySum += dayWeights[day];
-                SetDistributionMarker(probabilitySum, 0.25, result.Quartile1, () => result.Quartile1 = day);
-                SetDistributionMarker(probabilitySum, 0.5, result.Median, () => result.Median = day);
-                SetDistributionMarker(probabilitySum, 0.75, result.Quartile3, () => result.Quartile3 = day);
+                if(probabilitySum >= 0.25 && result.Quartile1 == null) result.Quartile1 = day;
+                if (probabilitySum >= 0.5 && result.Median == null) result.Median = day;
+                if (probabilitySum >= 0.75 && result.Quartile3 == null) result.Quartile3 = day;
             }
             return result;
         }
-
-        private void SetDistributionMarker<T>(double probabilitySum, double threshold, T markerValue, Action markerSetter)
-        {
-            if (probabilitySum >= threshold && markerValue == null)
-            {
-                markerSetter();
-            }
-        }
-
 
         private static double GetRandomizedActualForTask(Task d, double[] velocities, Random random)
         {
