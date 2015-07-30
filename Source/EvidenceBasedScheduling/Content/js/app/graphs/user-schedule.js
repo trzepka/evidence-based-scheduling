@@ -15,7 +15,7 @@
           return _this.doDraw();
         };
       })(this);
-      return setInterval(func, 1000);
+      return setInterval(func, 500);
     };
 
     UserScheduleGraph.prototype.init = function() {
@@ -54,24 +54,37 @@
     };
 
     UserScheduleGraph.prototype.doDraw = function() {
-      var format, x, y;
+      var format, median, x, y;
       format = d3.time.format("%Y-%m-%d");
+      this.dataForDrawing = this.data.filter((function(_this) {
+        return function(d) {
+          return _this.showUnassignedTasks === true || (_this.showUnassignedTasks === false && d.user.name !== "Unassigned");
+        };
+      })(this));
       x = d3.time.scale().domain([
-        this.startDate, d3.time.day.offset(this.startDate, d3.max(this.data, function(d) {
+        this.startDate, d3.time.day.offset(this.startDate, d3.max(this.dataForDrawing, function(d) {
           return d.stats.max;
         }) + 2)
       ]).range([0, this.width]);
-      y = d3.scale.ordinal().domain(d3.map(this.data, function(d) {
+      y = d3.scale.ordinal().domain(d3.map(this.dataForDrawing, function(d) {
         return d.user.name;
       }).keys()).rangePoints([0, this.height], 1);
-      this.svg.selectAll(".y.axis").call(this.yAxis);
+      this.yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
+      this.svg.selectAll(".y.axis").transition().duration(500).call(this.yAxis);
       this.svg.selectAll(".x.axis").call(this.xAxis);
       this.drawBar(x, y, this.startDate);
       this.drawFrontWhisker(x, y, this.startDate);
       this.drawBackWhisker(x, y, this.startDate);
-      return this.svg.selectAll(".median").data(this.data.filter(function(d) {
+      median = this.svg.selectAll("line.median").data(this.dataForDrawing.filter(function(d) {
         return d.stats.median !== d.stats.quartile1 && d.stats.median !== d.stats.quartile3;
-      })).enter().append("line").attr("class", "median").attr("x1", (function(_this) {
+      }));
+      median.transition().duration(500).attr("y1", function(d) {
+        return y(d.user.name) - 10;
+      }).attr("y2", function(d) {
+        return y(d.user.name) + 10;
+      });
+      median.exit().remove();
+      return median.enter().append("line").attr("class", "median").attr("x1", (function(_this) {
         return function(d) {
           return _this.getCoordinateFromDate(x, _this.startDate, d.stats.median);
         };
@@ -113,11 +126,10 @@
           return initialXEnd(d);
         }
       };
-      bar = this.svg.selectAll(".bar").data(this.data.filter((function(_this) {
-        return function(d) {
-          return _this.showUnassignedTasks === true || (_this.showUnassignedTasks === false && d.user.name !== "Unassigned");
-        };
-      })(this)));
+      bar = this.svg.selectAll("rect.bar").data(this.dataForDrawing);
+      bar.transition().duration(500).attr("y", function(d) {
+        return yscale(d.user.name) - 10;
+      });
       bar.enter().append("rect").attr("class", "bar").attr("x", function(d) {
         return xstart(d);
       }).attr("height", 20).attr("y", function(d) {
@@ -131,9 +143,9 @@
     };
 
     UserScheduleGraph.prototype.drawFrontWhisker = function(xscale, yscale, startDate) {
-      var conditionalLineStart, frontWhisker, lineEnd, lineStart, x;
+      var conditionalLineStart, frontWhisker, lineEnd, lineStart, whiskerGraphics, x;
       this.startDate = startDate;
-      frontWhisker = this.svg.selectAll(".front-whisker").data(this.data).enter();
+      frontWhisker = this.svg.selectAll("g.front-whisker").data(this.dataForDrawing);
       lineStart = function(d) {
         return d.stats.min;
       };
@@ -152,38 +164,25 @@
           return x(d, lineStart);
         }
       };
-      frontWhisker.append("line").attr("class", "whisker").attr("x1", (function(_this) {
-        return function(d) {
-          return conditionalLineStart(d);
-        };
-      })(this)).attr("x2", (function(_this) {
-        return function(d) {
-          return _this.getCoordinateFromDate(xscale, _this.startDate, lineEnd(d));
-        };
-      })(this)).attr("y1", function(d) {
-        return yscale(d.user.name);
-      }).attr("y2", function(d) {
-        return yscale(d.user.name);
+      frontWhisker.transition().duration(500).attr("transform", function(d) {
+        return "translate(" + conditionalLineStart(d) + ", " + (yscale(d.user.name) - 10) + ")";
       });
-      return frontWhisker.append("line").attr("class", "whisker").attr("x1", (function(_this) {
-        return function(d) {
-          return conditionalLineStart(d);
-        };
-      })(this)).attr("x2", (function(_this) {
-        return function(d) {
-          return conditionalLineStart(d);
-        };
-      })(this)).attr("y1", function(d) {
-        return yscale(d.user.name) - 10;
-      }).attr("y2", function(d) {
-        return yscale(d.user.name) + 10;
+      frontWhisker.exit().remove();
+      whiskerGraphics = frontWhisker.enter().append("g").attr("class", 'front-whisker').attr("transform", function(d) {
+        return "translate(" + conditionalLineStart(d) + ", " + (yscale(d.user.name) - 10) + ")";
       });
+      whiskerGraphics.append("line").attr("class", "whisker").attr("x1", 0).attr("x2", (function(_this) {
+        return function(d) {
+          return _this.getCoordinateFromDate(xscale, _this.startDate, lineEnd(d)) - conditionalLineStart(d);
+        };
+      })(this)).attr("y1", 10).attr("y2", 10);
+      return whiskerGraphics.append("line").attr("class", "whisker").attr("x1", 0).attr("x2", 0).attr("y1", 0).attr("y2", 20);
     };
 
     UserScheduleGraph.prototype.drawBackWhisker = function(xscale, yscale, startDate) {
-      var backWhisker, conditionalLineEnd, lineEnd, lineStart, x;
+      var backWhisker, conditionalLineEnd, lineEnd, lineStart, whiskerGraphics, x;
       this.startDate = startDate;
-      backWhisker = this.svg.selectAll(".back-whisker").data(this.data).enter();
+      backWhisker = this.svg.selectAll("g.back-whisker").data(this.dataForDrawing);
       lineStart = function(d) {
         return d.stats.quartile3;
       };
@@ -202,32 +201,31 @@
           return x(d, lineEnd);
         }
       };
-      backWhisker.append("line").attr("class", "whisker").attr("x1", (function(_this) {
+      backWhisker.transition().duration(500).attr("transform", (function(_this) {
         return function(d) {
-          return _this.getCoordinateFromDate(xscale, _this.startDate, lineStart(d));
+          return "translate(" + _this.getCoordinateFromDate(xscale, _this.startDate, lineStart(d)) + ", " + (yscale(d.user.name) - 10) + ")";
+        };
+      })(this));
+      whiskerGraphics = backWhisker.enter().append("g").attr("class", 'back-whisker').attr("transform", (function(_this) {
+        return function(d) {
+          return "translate(" + _this.getCoordinateFromDate(xscale, _this.startDate, lineStart(d)) + ", " + (yscale(d.user.name) - 10) + ")";
+        };
+      })(this));
+      backWhisker.exit().remove();
+      whiskerGraphics.append("line").attr("class", "whisker").attr("x1", 0).attr("x2", (function(_this) {
+        return function(d) {
+          return conditionalLineEnd(d) - _this.getCoordinateFromDate(xscale, _this.startDate, lineStart(d));
+        };
+      })(this)).attr("y1", 10).attr("y2", 10);
+      return whiskerGraphics.append("line").attr("class", "whisker").attr("x1", (function(_this) {
+        return function(d) {
+          return conditionalLineEnd(d) - _this.getCoordinateFromDate(xscale, _this.startDate, lineStart(d));
         };
       })(this)).attr("x2", (function(_this) {
         return function(d) {
-          return conditionalLineEnd(d);
+          return conditionalLineEnd(d) - _this.getCoordinateFromDate(xscale, _this.startDate, lineStart(d));
         };
-      })(this)).attr("y1", function(d) {
-        return yscale(d.user.name);
-      }).attr("y2", function(d) {
-        return yscale(d.user.name);
-      });
-      return backWhisker.append("line").attr("class", "whisker").attr("x1", (function(_this) {
-        return function(d) {
-          return conditionalLineEnd(d);
-        };
-      })(this)).attr("x2", (function(_this) {
-        return function(d) {
-          return conditionalLineEnd(d);
-        };
-      })(this)).attr("y1", function(d) {
-        return yscale(d.user.name) - 10;
-      }).attr("y2", function(d) {
-        return yscale(d.user.name) + 10;
-      });
+      })(this)).attr("y1", 0).attr("y2", 20);
     };
 
     UserScheduleGraph.prototype.getCoordinateFromDate = function(scale, startDate, days) {
