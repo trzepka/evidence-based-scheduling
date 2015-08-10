@@ -1,4 +1,4 @@
-namespace EvidenceBasedScheduling.Models.Api
+namespace EvidenceBasedScheduling.Communication.Api
 {
     public class UserSchedulePrediction
     {

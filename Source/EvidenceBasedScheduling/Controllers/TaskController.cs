@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Contrib;
 using RestSharp.Extensions;
+using EvidenceBasedScheduling.Communication.Api;
 
 namespace EvidenceBasedScheduling.Controllers
 {

@@ -9,6 +9,7 @@ using EvidenceBasedScheduling.Models.Api;
 using EvidenceBasedScheduling.Models.Jira;
 using Newtonsoft.Json;
 using RestSharp;
+using EvidenceBasedScheduling.Communication.Api;
 
 namespace EvidenceBasedScheduling.Business
 {

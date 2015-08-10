@@ -82,6 +82,7 @@ class App.UserScheduleGraph
 
         @svg.selectAll(".x.axis")
             .call(@xAxis);
+        
         @drawBar(x, y, @startDate)
         @drawFrontWhisker(x, y, @startDate)
         @drawBackWhisker(x, y, @startDate)
@@ -122,7 +123,11 @@ class App.UserScheduleGraph
             .attr("width", (d) => xend(d) - xstart(d));
 
         bar.exit()
-            .remove();
+            .attr('opacity', 1)
+            .transition()
+            .duration(500)
+            .attr('opacity', 1e-6)
+            .each('end', () -> d3.select(this).remove());
 
     drawFrontWhisker: (xscale, yscale, @startDate) ->
         frontWhisker = @svg.selectAll("g.front-whisker")

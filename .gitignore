@@ -4,3 +4,7 @@ Source/EvidenceBasedScheduling/obj/
 Source/EvidenceBasedScheduling/Content/js/lib/
 packages/
 Source/EvidenceBasedScheduling/credentials.json
+Source/Communication/bin/
+Source/Communication/obj/
+Source/ConsoleClient/bin/
+Source/ConsoleClient/obj/

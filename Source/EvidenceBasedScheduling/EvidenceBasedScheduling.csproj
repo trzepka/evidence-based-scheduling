@@ -143,11 +143,8 @@
   <ItemGroup>
     <Compile Include="Business\TasksProvider.cs" />
     <Compile Include="Controllers\AuthController.cs" />
-    <Compile Include="Models\Api\DistributionStatistics.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Models\Api\PredictedTask.cs" />
-    <Compile Include="Models\Api\UserSchedule.cs" />
-    <Compile Include="Models\Api\Assignee.cs" />
     <Compile Include="Models\Api\Task.cs" />
     <Compile Include="Models\Jira\Credentials.cs" />
     <Compile Include="Models\Jira\Fields.cs" />
@@ -172,6 +169,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\lib\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Communication\Communication.csproj">
+      <Project>{60339e4c-25bf-4d55-8f16-249b7f23fbce}</Project>
+      <Name>Communication</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

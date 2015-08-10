@@ -1,4 +1,6 @@
-﻿namespace EvidenceBasedScheduling.Models.Api
+﻿using EvidenceBasedScheduling.Communication.Api;
+
+namespace EvidenceBasedScheduling.Models.Api
 {
     public class Task
     {

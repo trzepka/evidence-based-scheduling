@@ -139,7 +139,9 @@
           return xend(d) - xstart(d);
         };
       })(this));
-      return bar.exit().remove();
+      return bar.exit().attr('opacity', 1).transition().duration(500).attr('opacity', 1e-6).each('end', function() {
+        return d3.select(this).remove();
+      });
     };
 
     UserScheduleGraph.prototype.drawFrontWhisker = function(xscale, yscale, startDate) {

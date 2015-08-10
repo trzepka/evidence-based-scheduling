@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvidenceBasedScheduling", "EvidenceBasedScheduling\EvidenceBasedScheduling.csproj", "{45114A0F-447E-442F-A8A8-5C768887B969}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleClient", "ConsoleClient\ConsoleClient.csproj", "{8926E9AB-C756-4D17-8447-57108F764BC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Communication", "Communication\Communication.csproj", "{60339E4C-25BF-4D55-8F16-249B7F23FBCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{45114A0F-447E-442F-A8A8-5C768887B969}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45114A0F-447E-442F-A8A8-5C768887B969}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45114A0F-447E-442F-A8A8-5C768887B969}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8926E9AB-C756-4D17-8447-57108F764BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8926E9AB-C756-4D17-8447-57108F764BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8926E9AB-C756-4D17-8447-57108F764BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8926E9AB-C756-4D17-8447-57108F764BC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60339E4C-25BF-4D55-8F16-249B7F23FBCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60339E4C-25BF-4D55-8F16-249B7F23FBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60339E4C-25BF-4D55-8F16-249B7F23FBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60339E4C-25BF-4D55-8F16-249B7F23FBCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
