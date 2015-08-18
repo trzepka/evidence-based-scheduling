@@ -20,7 +20,7 @@ namespace EvidenceBasedScheduling.Business
         public IEnumerable<Task> CurrentTasks { get; private set; }
         public IEnumerable<Task> HistoricalTasks { get; private set; }
 
-        public TasksProvider()
+        public TasksProvider(string historicalTasksQuery, string currentTasksQuery)
         {
             credentials = JsonConvert.DeserializeObject<Credentials>(
                 File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase,
@@ -40,10 +40,10 @@ namespace EvidenceBasedScheduling.Business
                         }
                 };
             HistoricalTasks =
-                QueryForTasks("status=Done")
+                QueryForTasks(historicalTasksQuery)
                     .Select(
                         jiraTaskToTaskTransformer);
-            CurrentTasks = QueryForTasks("status=\"To Do\"")
+            CurrentTasks = QueryForTasks(currentTasksQuery)
                 .Select(
                     jiraTaskToTaskTransformer);
         }

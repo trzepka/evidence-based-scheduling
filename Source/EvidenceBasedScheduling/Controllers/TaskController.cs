@@ -23,18 +23,17 @@ namespace EvidenceBasedScheduling.Controllers
         private const string UNASSIGNED = "Unassigned";
         private const int DEFAULT_PESSIMISTIC_LENGTH_SECONDS = 2 * 8 * 60 * 60;//2 days = 16h
 
-        [HttpGet]
-        public IEnumerable<Task> Index()
-        {
-            var taskProvider = new TasksProvider();
-            return taskProvider.CurrentTasks;
-        }
+        //[HttpGet]
+        //public IEnumerable<Task> Index()
+        //{
+        //    var taskProvider = new TasksProvider();
+        //    return taskProvider.CurrentTasks;
+        //}
 
         [HttpGet]
-        public IEnumerable<UserSchedulePrediction> PredictUsersSchedules()
+        public IEnumerable<UserSchedulePrediction> PredictUsersSchedules(string historicalTasksQuery, string currentTasksQuery)
         {
-
-            var taskProvider = new TasksProvider();
+            var taskProvider = new TasksProvider(historicalTasksQuery ?? "status=Done1", currentTasksQuery ?? "status=\"To Do1\"");
             var tasksByUser = taskProvider.CurrentTasks.GroupBy(u => u.Assignee == null ? UNASSIGNED : u.Assignee.Name)
                 .ToDictionary(g => g.Key, g => g.Select(e => e));
             var velocitiesByUser = taskProvider.HistoricalTasks
