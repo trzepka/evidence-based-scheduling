@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommandLine;
+using CommandLine.Text;
 
 namespace ConsoleClient
 {
@@ -12,7 +13,7 @@ namespace ConsoleClient
         static void Main(string[] args)
         {
             string invokedVerb;
-            object invokedVerbInstance;
+            object invokedVerbInstance = null;
 
             var options = new Options();
             if (!CommandLine.Parser.Default.ParseArguments(args, options,
@@ -26,34 +27,10 @@ namespace ConsoleClient
             {
                 Environment.Exit(CommandLine.Parser.DefaultExitCodeFail);
             }
-
+            var command = new CommandFactory().CreateCommand(invokedVerbInstance);
+            command.Execute();
 
         }
     }
 
-    public abstract class CommonOptions
-    {
-        [Option("service-url")]
-        public string ServiceUrl { get; set; }
-    }
-
-
-    public class Options
-    {
-        [VerbOption("predict")]
-        public PredictSubOptions PredictVerb { get; set; }
-
-        [HelpVerbOption]
-        public string GetUsage(string verb)
-        {
-            return HelpText.AutoBuild(this, verb);
-        }
-    }
-
-    public class PredictSubOptions : CommonOptions
-    {
-        [Option("exclude-unestimated")]
-        public bool ExcludeUnestimated { get; set; }
-
-    }
 }
