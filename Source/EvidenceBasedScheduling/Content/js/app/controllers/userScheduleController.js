@@ -1,5 +1,6 @@
-﻿App.appModule.controller('userScheduleCtrl', ['$scope', 'Task',
-    function ($scope, Task) {
+﻿App.appModule.controller('userScheduleCtrl', [
+    '$scope', 'Task',
+    function($scope, Task) {
         $scope.showUnestimatedTasks = true;
         $scope.showUnassignedTasks = true;
         var userSchedules = Task.userSchedules(function() {
@@ -7,7 +8,8 @@
             $scope.userScheduleGraph.draw();
         });
 
-        $scope.toggleUnassignedTasks = function () {
+        $scope.toggleUnassignedTasks = function() {
             $scope.userScheduleGraph.showUnassignedTasks = $scope.showUnassignedTasks;
         };
-    }]);
+    }
+]);

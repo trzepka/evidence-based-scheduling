@@ -1,73 +1,66 @@
-﻿body {
-  padding-top: 50px;
-}
-.main-content{
-  padding: 40px 15px;
-  text-align: center;
+﻿body { padding-top: 50px; }
+
+.main-content {
+    padding: 40px 15px;
+    text-align: center;
 }
 
-.axis {
-  font: 10px sans-serif;
-}
+.axis { font: 10px sans-serif; }
 
 .axis path,
 .axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+    fill: none;
+    shape-rendering: crispEdges;
+    stroke: #000;
 }
 
 line.whisker {
-  fill: none;
-  stroke: steelblue;
-  shape-rendering: crispEdges;
+    fill: none;
+    shape-rendering: crispEdges;
+    stroke: steelblue;
 }
 
-line.median{
-  fill: none;
-  stroke: white;
-  shape-rendering: crispEdges;
+line.median {
+    fill: none;
+    shape-rendering: crispEdges;
+    stroke: white;
 }
 
-.bar {
-  fill: steelblue;
-}
+.bar { fill: steelblue; }
 
-.bar:hover{
-    stroke:red;
-}
+.bar:hover { stroke: red; }
 
 .form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
+    margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
 }
+
 .form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
-}
-.form-signin .checkbox {
-  font-weight: normal;
-}
+.form-signin .checkbox { margin-bottom: 10px; }
+
+.form-signin .checkbox { font-weight: normal; }
+
 .form-signin .form-control {
-  position: relative;
-  height: auto;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 10px;
-  font-size: 16px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    position: relative;
 }
-.form-signin .form-control:focus {
-  z-index: 2;
-}
+
+.form-signin .form-control:focus { z-index: 2; }
+
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: -1px;
 }
+
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-bottom: 10px;
 }

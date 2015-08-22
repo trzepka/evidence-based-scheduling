@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Runtime.Caching;
 using System.Web;
+using EvidenceBasedScheduling.Communication.Api;
 using EvidenceBasedScheduling.Models.Api;
 using EvidenceBasedScheduling.Models.Jira;
 using Newtonsoft.Json;
 using RestSharp;
-using EvidenceBasedScheduling.Communication.Api;
 using RestSharp.Authenticators;
 
 namespace EvidenceBasedScheduling.Business
 {
     public class TasksProvider
     {
-        private Credentials credentials;
-        public IEnumerable<Task> CurrentTasks { get; private set; }
-        public IEnumerable<Task> HistoricalTasks { get; private set; }
+        private readonly Credentials credentials;
 
         public TasksProvider(string historicalTasksQuery, string currentTasksQuery)
         {
@@ -32,8 +29,9 @@ namespace EvidenceBasedScheduling.Business
                     Key = t.Key,
                     EstimateSeconds = t.Fields.Timetracking.OriginalEstimateSeconds,
                     TimeSpentSeconds = t.Fields.Timetracking.TimeSpentSeconds,
-                    Assignee = t.Fields.Assignee == null ? null :
-                        new Assignee
+                    Assignee = t.Fields.Assignee == null
+                        ? null
+                        : new Assignee
                         {
                             Name = t.Fields.Assignee.DisplayName,
                             EmailAddress = t.Fields.Assignee.EmailAddress
@@ -48,6 +46,9 @@ namespace EvidenceBasedScheduling.Business
                     jiraTaskToTaskTransformer);
         }
 
+        public IEnumerable<Task> CurrentTasks { get; private set; }
+        public IEnumerable<Task> HistoricalTasks { get; private set; }
+
         private IEnumerable<JiraIssue> QueryForTasks(string jql)
         {
             var client = new RestClient("http://jira-localhost:8083")
@@ -55,7 +56,7 @@ namespace EvidenceBasedScheduling.Business
                 Authenticator = new HttpBasicAuthenticator(credentials.User, credentials.Password)
             };
 
-            Func<int, string> buildResourceFunc = (startAt) =>
+            Func<int, string> buildResourceFunc = startAt =>
                 String.Format("rest/api/2/search?jql={0}&fields=timetracking,assignee,creator&startAt={1}",
                     HttpUtility.UrlEncode(jql), startAt);
             var request = new RestRequest(buildResourceFunc(0), Method.GET)
@@ -67,9 +68,9 @@ namespace EvidenceBasedScheduling.Business
             int totalDownloaded = 0;
             do
             {
-                var response = client.Execute<JiraSearchResult>(request);
-                var responseOk = response.ResponseStatus == ResponseStatus.Completed &&
-                                 response.StatusCode == HttpStatusCode.OK;
+                IRestResponse<JiraSearchResult> response = client.Execute<JiraSearchResult>(request);
+                bool responseOk = response.ResponseStatus == ResponseStatus.Completed &&
+                                  response.StatusCode == HttpStatusCode.OK;
                 if (responseOk)
                 {
                     if (response.Data != null && response.Data.Issues != null)

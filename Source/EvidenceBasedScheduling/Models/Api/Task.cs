@@ -4,7 +4,10 @@ namespace EvidenceBasedScheduling.Models.Api
 {
     public class Task
     {
-        public Task() { }
+        public Task()
+        {
+        }
+
         public Task(Task otherTask)
         {
             Key = otherTask.Key;
