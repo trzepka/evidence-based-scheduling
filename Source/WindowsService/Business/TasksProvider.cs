@@ -10,6 +10,7 @@ using EvidenceBasedScheduling.Models.Jira;
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
+using RestSharp.Extensions.MonoHttp;
 
 namespace EvidenceBasedScheduling.Business
 {
