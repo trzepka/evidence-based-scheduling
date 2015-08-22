@@ -110,7 +110,6 @@
     <Content Include="Web\Content\js\app\graphs\user-schedule.min.js">
       <DependentUpon>user-schedule.js</DependentUpon>
     </Content>
-    <Content Include="Web\Content\js\app\routingConfig.js" />
     <Content Include="Web\Content\js\app\services.js" />
     <Content Include="Web\StaticPages\index.htm" />
     <Content Include="Web\StaticPages\Partial\signin.html" />
