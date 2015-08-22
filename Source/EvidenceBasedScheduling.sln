@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleClient", "ConsoleCli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Communication", "Communication\Communication.csproj", "{60339E4C-25BF-4D55-8F16-249B7F23FBCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService", "WindowsService\WindowsService.csproj", "{99AC636B-E3EC-4553-91D7-38E739127BDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{60339E4C-25BF-4D55-8F16-249B7F23FBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60339E4C-25BF-4D55-8F16-249B7F23FBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60339E4C-25BF-4D55-8F16-249B7F23FBCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99AC636B-E3EC-4553-91D7-38E739127BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99AC636B-E3EC-4553-91D7-38E739127BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99AC636B-E3EC-4553-91D7-38E739127BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99AC636B-E3EC-4553-91D7-38E739127BDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

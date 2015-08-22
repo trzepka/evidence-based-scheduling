@@ -8,3 +8,5 @@ Source/Communication/bin/
 Source/Communication/obj/
 Source/ConsoleClient/bin/
 Source/ConsoleClient/obj/
+Source/WindowsService/bin/
+Source/WindowsService/obj/
