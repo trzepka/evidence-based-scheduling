@@ -1,5 +1,3 @@
-using EvidenceBasedScheduling.Controllers;
-
 namespace EvidenceBasedScheduling.Models.Jira
 {
     public class JiraIssue

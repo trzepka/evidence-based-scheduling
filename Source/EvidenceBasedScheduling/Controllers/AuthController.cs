@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
-using System.Web;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using Newtonsoft.Json;
 
 namespace EvidenceBasedScheduling.Controllers
 {
@@ -22,7 +18,7 @@ namespace EvidenceBasedScheduling.Controllers
         {
             //var jira = new Jira("http://localhost:8083", user.UserName, user.Password);
             //var token = jira.GetAccessToken();
-            var authenticationManager = Request.GetOwinContext().Authentication;
+            IAuthenticationManager authenticationManager = Request.GetOwinContext().Authentication;
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.UserName),
@@ -37,12 +33,12 @@ namespace EvidenceBasedScheduling.Controllers
                 AllowRefresh = true,
                 IsPersistent = user.RememberMe,
                 ExpiresUtc = DateTime.UtcNow.AddDays(7)
-            }, identity); 
+            }, identity);
         }
 
         public void Logout()
         {
-            var authenticationManager = Request.GetOwinContext().Authentication;
+            IAuthenticationManager authenticationManager = Request.GetOwinContext().Authentication;
             authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
 

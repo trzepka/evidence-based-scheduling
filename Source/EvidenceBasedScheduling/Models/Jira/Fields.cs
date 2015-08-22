@@ -1,6 +1,4 @@
-﻿using EvidenceBasedScheduling.Controllers;
-
-namespace EvidenceBasedScheduling.Models.Jira
+﻿namespace EvidenceBasedScheduling.Models.Jira
 {
     public class Fields
     {
