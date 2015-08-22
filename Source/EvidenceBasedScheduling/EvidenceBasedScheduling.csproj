@@ -116,30 +116,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\main.css" />
-    <Content Include="Content\js\app\controllers\signinController.js" />
-    <Content Include="Content\js\app\controllers\userScheduleController.js" />
-    <Content Include="Content\js\app\graphs\user-schedule.js">
-      <DependentUpon>user-schedule.coffee</DependentUpon>
-    </Content>
-    <Content Include="Content\js\app\graphs\user-schedule.min.js">
-      <DependentUpon>user-schedule.js</DependentUpon>
-    </Content>
-    <Content Include="Content\js\app\app.js" />
-    <Content Include="Content\js\app\controllers\taskController.js" />
-    <Content Include="Content\js\app\routingConfig.js" />
-    <Content Include="Content\js\app\services.js" />
-    <Content Include="Content\js\app\graphs\user-schedule.coffee" />
-    <Content Include="Content\js\app\graphs\user-schedule.js.map">
-      <DependentUpon>user-schedule.js</DependentUpon>
-    </Content>
-    <Content Include="Content\js\app\graphs\user-schedule.min.js.map">
-      <DependentUpon>user-schedule.min.js</DependentUpon>
-    </Content>
-    <Content Include="StaticPages\index.htm" />
-    <Content Include="StaticPages\Partial\signin.html" />
-    <Content Include="StaticPages\Partial\task-list.html" />
-    <Content Include="StaticPages\Partial\user-schedule.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -169,9 +145,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\js\lib\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Communication\Communication.csproj">
       <Project>{60339e4c-25bf-4d55-8f16-249b7f23fbce}</Project>

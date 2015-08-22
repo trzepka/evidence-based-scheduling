@@ -10,3 +10,4 @@ Source/ConsoleClient/bin/
 Source/ConsoleClient/obj/
 Source/WindowsService/bin/
 Source/WindowsService/obj/
+Source/WindowsService/Web/Content/js/lib/
